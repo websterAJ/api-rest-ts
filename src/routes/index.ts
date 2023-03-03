@@ -9,7 +9,6 @@ const cleanFileName = (fileName:string)=>{
 }
 readdirSync(PAT_ROUTER).filter((filename)=>{
     const cleanName = cleanFileName(filename)
-    console.log(cleanName);
     if (cleanName != "index") {
         import(`./${cleanName}`).then((moduleRouter)=>{
             router.use(`/${cleanName}`,moduleRouter.router)

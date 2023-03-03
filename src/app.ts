@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(cors());
-app.use(express.json);
+app.use(express.json());
 app.use(router);
 db().then(()=>console.log("conectado con mongo"));
-app.listen(PORT,()=>console.log("Server listen"))
+app.listen(PORT,()=>console.log(`Listo por el puerto ${PORT}`))

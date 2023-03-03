@@ -1,20 +1,32 @@
 import{ Request, Response} from "express";
-import { insertUsuario } from "../services/Usuarios";
+import { insertUsuario, getUsuarios, getUsuario , deleteUsuario} from "../services/Usuarios";
 import handleHttp from "../utils/error.handle";
 
-const postUsuario = async ({body}: Request, res:Response)=>{
+const getusuario = async ({params}: Request, res:Response)=>{
     try {
-        console.log(body);
+        const {id}=params;
+        const Data= await getUsuario(id);
+        if (Data?.$isEmpty) {
+            res.send(Data);
+        }else{
+            handleHttp(res,"Datos no encontrados");
+        }
+        
     } catch (error) {
-        handleHttp(res,"Error al procesar su peticion");
+        handleHttp(res,"Error al procesar su peticion", error);
     }
 };
 
-const getUsuarios = async ({body}: Request, res:Response)=>{
+const getAllusuarios = async ({body}: Request, res:Response)=>{
     try {
-        console.log(body);
+        const Data= await getUsuarios();
+        if (Data != null) {
+            res.send(Data);
+        }else{
+            handleHttp(res,"Datos no encontrados");
+        }
     } catch (error) {
-        handleHttp(res,"Error al procesar su peticion");
+        handleHttp(res,"Error al procesar su peticion", error);
     }
 };
 
@@ -22,26 +34,31 @@ const updateUsuario = async ({body}: Request, res:Response)=>{
     try {
         console.log(body);
     } catch (error) {
-        handleHttp(res,"Error al procesar su peticion");
+        handleHttp(res,"Error al procesar su peticion", error);
     }
 };
 
 const createUsuario = async ({body}: Request, res:Response)=>{
     try {
-        console.log(body);
         const createUsuario= await insertUsuario(body);
         res.send(createUsuario);
     } catch (error) {
-        handleHttp(res,"Error al procesar su peticion");
+        handleHttp(res,"Error al procesar su peticion", error);
     }
 };
 
-const deleteUsuario = async ({body}: Request, res:Response)=>{
+const deleteusuario = async ({params}: Request, res:Response)=>{
     try {
-        console.log(body);
+        const {id}=params;
+        const Data= await deleteUsuario(id);
+        if (Data?.$isEmpty) {
+            res.send(Data);
+        }else{
+            handleHttp(res,"Datos no encontrados");
+        }
     } catch (error) {
-        handleHttp(res,"Error al procesar su peticion");
+        handleHttp(res,"Error al procesar su peticion", error);
     }
 };
 
-export { postUsuario , getUsuarios , updateUsuario, createUsuario, deleteUsuario};
+export { getAllusuarios , getusuario,updateUsuario, createUsuario, deleteusuario};

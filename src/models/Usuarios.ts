@@ -14,16 +14,22 @@ const UsuarioShema = new Schema<Usuario>(
         Cedula:{
             type:String,
             required: true,
+            unique:true
         },
         Correo:{
             type:String,
             required: true,
+            unique:true
         },
+        Password:{
+            type:String,
+            required: true,
+        }
     },{
         timestamps:true,
         versionKey:false
     }
 );
 
-const UsuarioModel = model('usuario',UsuarioShema);
+const UsuarioModel = model('usuarios',UsuarioShema);
 export default UsuarioModel;

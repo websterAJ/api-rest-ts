@@ -1,11 +1,11 @@
 import { Router,Request,Response } from "express";
-import {postUsuario,getUsuarios,updateUsuario,createUsuario,deleteUsuario} from "../controllers/Usuarios";
+import {getusuario,getAllusuarios,updateUsuario,createUsuario, deleteusuario} from "../controllers/Usuarios";
 const router = Router()
 
-router.get("/",getUsuarios);
+router.get("/",getAllusuarios);
 router.post("/",createUsuario);
-router.post("/:id",postUsuario);
+router.get("/:id",getusuario);
 router.put("/:id",updateUsuario);
-router.delete("/:id",deleteUsuario);
+router.delete("/:id",deleteusuario);
 
 export { router };
