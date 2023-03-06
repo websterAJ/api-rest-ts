@@ -15,7 +15,11 @@ const loginCtrl = async ({body}: Request, res:Response)=>{
     try {
         const Data= await LoginUser(body);
         if (Data != null) {
-            res.send(Data);
+            if(Data == "PASSWORD_INCORRECT"){
+                res.status(403).send(Data);
+            }else{
+                res.status(200).send(Data);
+            }
         }else{
             handleHttp(res,"Datos no encontrados");
         }
