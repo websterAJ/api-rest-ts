@@ -1,5 +1,5 @@
 import { Router,Request,Response } from "express";
-import {getusuario,getAllusuarios,updateUsuario,createUsuario, deleteusuario} from "../controllers/Usuarios";
+import {getusuario,getAllusuarios,updateUsuario, deleteusuario} from "../controllers/Usuarios";
 import { checkJwt } from "../middleware/session";
 const router = Router()
 
