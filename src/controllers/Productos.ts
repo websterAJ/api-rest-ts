@@ -1,5 +1,5 @@
 import{ Request, Response} from "express";
-import { insertProducto, getProductos, getProducto , deleteProducto} from "../services/Productos";
+import { insertProducto, getProductos, getProducto , deleteProducto, getProductosPages} from "../services/Productos";
 import handleHttp from "../utils/error.handle";
 
 const getproducto = async ({params}: Request, res:Response)=>{
@@ -19,7 +19,12 @@ const getproducto = async ({params}: Request, res:Response)=>{
 
 const getAllproductos = async ({body}: Request, res:Response)=>{
     try {
-        const Data= await getProductos();
+        let result = {};
+        const page = parseInt(body?.page) || 1
+        const productsPerPage = 10
+        
+        const Data= await getProductosPages(page,productsPerPage);
+        
         if (Data != null) {
             res.send(Data);
         }else{

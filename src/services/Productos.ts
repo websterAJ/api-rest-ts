@@ -16,6 +16,11 @@ const getProducto= async (id:string)=>{
     return Response;
 }
 
+const getProductosPages= async (pageNumber:number,productsPerPage:number) =>{
+    const Response = await ProductoModel.find().skip((pageNumber - 1) * productsPerPage).limit(productsPerPage);
+    return Response;
+}
+
 const getProductos= async ()=>{
     const Response = await ProductoModel.find({});
     return Response;
@@ -27,4 +32,4 @@ const deleteProducto= async (id:string)=>{
 }
 
 
-export {insertProducto, getProductos, updateProducto, deleteProducto, getProducto}
+export {insertProducto, getProductos, updateProducto, deleteProducto, getProducto, getProductosPages}
